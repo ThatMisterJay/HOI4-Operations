@@ -1,0 +1,36 @@
+on_actions = {
+    on_startup = {
+        effect = {
+    		64 = {
+    			log = "[THIS.GetName] added as an Operations state"
+    			add_to_array = { provinces_@THIS = 375 }
+    			add_to_array = { provinces_@THIS = 478 }
+    			add_to_array = { provinces_@THIS = 3367 }
+    			add_to_array = { provinces_@THIS = 3499 }
+    			add_to_array = { provinces_@THIS = 3522 }
+    			add_to_array = { provinces_@THIS = 6487 }
+    			add_to_array = { provinces_@THIS = 6521 }
+    			add_to_array = { provinces_@THIS = 9428 }
+    			add_to_array = { provinces_@THIS = 9456 }
+    			add_to_array = { provinces_@THIS = 9496 }
+    			add_to_array = { provinces_@THIS = 9560 }
+    			add_to_array = { provinces_@THIS = 11219 }
+    			add_to_array = { provinces_@THIS = 11359 }
+    			add_to_array = { provinces_@THIS = 11415 }
+    			add_to_array = { provinces_@THIS = 11444 }
+    			add_to_array = { provinces_@THIS = 11505 }
+    		}
+        }
+    }
+    on_daily_GER = {
+        effect = {
+            ### Operations daily refresh ###
+                for_each_scope_loop = {
+                    array = states_required_checking
+
+                    update_operations = yes
+                }
+            ###
+        }
+    }
+}

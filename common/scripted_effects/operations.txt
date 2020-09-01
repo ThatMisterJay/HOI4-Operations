@@ -1,0 +1,335 @@
+update_operations = {
+	update_movement_operation = yes
+	update_attack_operation = yes
+}
+
+add_movement_operation = {
+    log = "Movement operation added on [THIS.GetName] for [ROOT.GetName]"
+
+	if = {
+		limit = { ROOT = { is_in_allied_faction = yes } }
+
+		set_state_flag = allies_faster_movement_operation
+
+		hidden_effect = { state_event = { id = dday_province_modifiers.1 days = 30 trigger_for = controller } }
+	}
+	else_if = {
+		limit = { ROOT = { is_in_german_faction = yes } }
+
+		set_state_flag = axis_faster_movement_operation
+
+		hidden_effect = { state_event = { id = dday_province_modifiers.2 days = 30 trigger_for = controller } }
+	}
+	add_to_array = { states_required_checking = THIS }
+	update_movement_operation = yes
+}
+
+update_movement_operation = {
+	log = "Updating movement operation in [THIS.GetName]"
+
+	if = {
+		limit = { has_state_flag = allies_faster_movement_operation }
+		update_allies_movement_operation = yes
+	}
+
+	if = {
+		limit = { has_state_flag = axis_faster_movement_operation }
+		update_axis_movement_operation = yes
+	}
+}
+
+update_allies_movement_operation = {
+	for_each_loop = {
+		array = provinces_@THIS
+
+		if = {
+			limit = {
+				any_country = {
+					is_in_allied_faction = yes
+					controls_province = var:v
+				}
+			}
+
+            meta_effect = {
+                text = {
+    				remove_province_modifier = {
+    					static_modifiers = { pm_allies_movement_inverted }
+    					province = [PROV]
+    				}
+    				remove_province_modifier = {
+    					static_modifiers = { pm_allies_movement }
+    					province = [PROV]
+    				}
+	    				add_province_modifier = {
+	    					static_modifiers = { pm_allies_movement }
+	    					province = [PROV]
+	    				}
+                }
+                PROV = "[?v]"
+            }
+		}
+		else = {
+            meta_effect = {
+                text = {
+    				remove_province_modifier = {
+    					static_modifiers = { pm_allies_movement_inverted }
+    					province = [PROV]
+    				}
+    				remove_province_modifier = {
+    					static_modifiers = { pm_allies_movement }
+    					province = [PROV]
+    				}
+	    				add_province_modifier = {
+	    					static_modifiers = { pm_allies_movement_inverted }
+	    					province = [PROV]
+	    				}
+                }
+                PROV = "[?v]"
+            }
+		}
+	}
+}
+
+update_axis_movement_operation = {
+	for_each_loop = {
+		array = provinces_@THIS
+
+		if = {
+			limit = {
+				any_country = {
+					is_in_german_faction = yes
+					controls_province = var:v
+				}
+			}
+
+			meta_effect = {
+				text = {
+					remove_province_modifier = {
+						static_modifiers = { pm_axis_movement_inverted }
+						province = [PROV]
+					}
+					remove_province_modifier = {
+						static_modifiers = { pm_axis_movement }
+						province = [PROV]
+					}
+					add_province_modifier = {
+						static_modifiers = { pm_axis_movement }
+						province = [PROV]
+					}
+				}
+				PROV = "[?v]"
+			}
+		}
+		else = {
+			meta_effect = {
+				text = {
+					remove_province_modifier = {
+						static_modifiers = { pm_axis_movement_inverted }
+						province = [PROV]
+					}
+					remove_province_modifier = {
+						static_modifiers = { pm_axis_movement }
+						province = [PROV]
+					}
+					add_province_modifier = {
+						static_modifiers = { pm_axis_movement_inverted }
+						province = [PROV]
+					}
+				}
+				PROV = "[?v]"
+			}
+		}
+	}
+}
+
+add_attack_operation = {
+    log = "Attack operation added on [THIS.GetName] for [ROOT.GetName]"
+
+	if = {
+		limit = { ROOT = { is_in_allied_faction = yes } }
+
+		set_state_flag = allies_attack_operation
+		hidden_effect = { state_event = { id = dday_province_modifiers.3 days = 30 trigger_for = controller } }
+	}
+	else_if = {
+		limit = { ROOT = { is_in_german_faction = yes } }
+
+		set_state_flag = axis_attack_operation
+		hidden_effect = { state_event = { id = dday_province_modifiers.4 days = 30 trigger_for = controller } }
+	}
+	add_to_array = { states_required_checking = THIS }
+	update_attack_operation = yes
+}
+
+update_attack_operation = {
+	log = "Updating attack operation in [THIS.GetName]"
+	if = {
+		limit = { has_state_flag = allies_attack_operation }
+		update_allies_attack_operation = yes
+	}
+
+	if = {
+		limit = { has_state_flag = axis_attack_operation }
+		update_axis_attack_operation = yes
+	}
+}
+
+update_allies_attack_operation = {
+	for_each_loop = {
+		array = provinces_@THIS
+
+		if = {
+			limit = {
+				any_country = {
+					is_in_allied_faction = yes
+					controls_province = var:v
+				}
+			}
+
+            meta_effect = {
+                text = {
+    				remove_province_modifier = {
+    					static_modifiers = { pm_allies_attack_inverted }
+    					province = [PROV]
+    				}
+    				remove_province_modifier = {
+    					static_modifiers = { pm_allies_attack }
+    					province = [PROV]
+    				}
+    				add_province_modifier = {
+    					static_modifiers = { pm_allies_attack }
+    					province = [PROV]
+    				}
+                }
+                PROV = "[?v]"
+            }
+		}
+		else = {
+            meta_effect = {
+                text = {
+    				remove_province_modifier = {
+    					static_modifiers = { pm_allies_attack_inverted }
+    					province = [PROV]
+    				}
+    				remove_province_modifier = {
+    					static_modifiers = { pm_allies_attack }
+    					province = [PROV]
+    				}
+    				add_province_modifier = {
+    					static_modifiers = { pm_allies_attack_inverted }
+    					province = [PROV]
+    				}
+                }
+                PROV = "[?v]"
+            }
+		}
+	}
+}
+
+update_axis_attack_operation = {
+	for_each_loop = {
+		array = provinces_@THIS
+
+		if = {
+			limit = {
+				any_country = {
+					is_in_german_faction = yes
+					controls_province = var:v
+				}
+			}
+
+			meta_effect = {
+				text = {
+					remove_province_modifier = {
+						static_modifiers = { pm_axis_attack_inverted }
+						province = [PROV]
+					}
+					remove_province_modifier = {
+						static_modifiers = { pm_axis_attack }
+						province = [PROV]
+					}
+					add_province_modifier = {
+						static_modifiers = { pm_axis_attack }
+						province = [PROV]
+					}
+				}
+				PROV = "[?v]"
+			}
+		}
+		else = {
+			meta_effect = {
+				text = {
+					remove_province_modifier = {
+						static_modifiers = { pm_axis_attack_inverted }
+						province = [PROV]
+					}
+					remove_province_modifier = {
+						static_modifiers = { pm_axis_attack }
+						province = [PROV]
+					}
+					add_province_modifier = {
+						static_modifiers = { pm_axis_attack_inverted }
+						province = [PROV]
+					}
+				}
+				PROV = "[?v]"
+			}
+		}
+	}
+}
+
+remove_axis_attack_operation = {
+	clr_state_flag = axis_attack_operation
+	remove_from_array = { array = states_required_checking value = THIS }
+
+	remove_province_modifier = {
+		static_modifiers = { pm_axis_attack }
+		province = { all_provinces = yes }
+	}
+	remove_province_modifier = {
+		static_modifiers = { pm_axis_attack_inverted }
+		province = { all_provinces = yes }
+	}
+}
+
+remove_axis_movement_operation = {
+	clr_state_flag = axis_faster_movement_operation
+	remove_from_array = { array = states_required_checking value = THIS }
+
+	remove_province_modifier = {
+		static_modifiers = { pm_axis_movement }
+		province = { all_provinces = yes }
+	}
+	remove_province_modifier = {
+		static_modifiers = { pm_axis_movement_inverted }
+		province = { all_provinces = yes }
+	}
+}
+
+remove_allies_attack_operation = {
+	clr_state_flag = allies_attack_operation
+	remove_from_array = { array = states_required_checking value = THIS }
+
+	remove_province_modifier = {
+		static_modifiers = { pm_allies_attack }
+		province = { all_provinces = yes }
+	}
+	remove_province_modifier = {
+		static_modifiers = { pm_allies_attack_inverted }
+		province = { all_provinces = yes }
+	}
+}
+
+remove_allies_movement_operation = {
+	clr_state_flag = allies_faster_movement_operation
+	remove_from_array = { array = states_required_checking value = THIS }
+
+	remove_province_modifier = {
+		static_modifiers = { pm_allies_movement }
+		province = { all_provinces = yes }
+	}
+	remove_province_modifier = {
+		static_modifiers = { pm_allies_movement_inverted }
+		province = { all_provinces = yes }
+	}
+}

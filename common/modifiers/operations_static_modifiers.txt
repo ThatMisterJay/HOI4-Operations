@@ -1,0 +1,9 @@
+pm_axis_movement = { army_speed_factor = 0.3 }
+pm_axis_movement_inverted = { army_speed_factor = -0.3 }
+pm_axis_attack = { army_attack_factor = 0.2 }
+pm_axis_attack_inverted = { army_defence_factor = -0.2 }
+
+pm_allies_movement = { army_speed_factor = 0.3 }
+pm_allies_movement_inverted = { army_speed_factor = -0.3 }
+pm_allies_attack = { army_attack_factor = 0.2 }
+pm_allies_attack_inverted = { army_defence_factor = -0.2 }

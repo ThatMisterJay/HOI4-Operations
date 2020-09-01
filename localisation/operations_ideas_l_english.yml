@@ -1,0 +1,9 @@
+﻿l_english:
+    pm_axis_movement:0 "Axis Operation: Movement"
+    pm_axis_movement_inverted:0 "Axis Operation: Movement"
+    pm_axis_attack:0 "Axis Operation: Attack"
+    pm_axis_attack_inverted:0 "Axis Operation: Attack"
+    pm_allies_movement:0 "Allied Operation: Movement"
+    pm_allies_movement_inverted:0 "Allied Operation: Movement"
+    pm_allies_attack:0 "Allied Operation: Attack"
+    pm_allies_attack_inverted:0 "Allied Operation: Attack"

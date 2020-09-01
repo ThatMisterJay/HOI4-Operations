@@ -1,0 +1,111 @@
+﻿###########################
+#        Operations       #
+###########################
+
+add_namespace = operations
+
+country_event = {
+	id = operations.1
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		log = "Clearing array:"
+		845 = {
+			log = "[THIS.GetName]"
+			clear_array = provinces_@THIS
+		}
+	}
+}
+
+#Example of how to add a state to get buffs#
+country_event = {
+	id = operations.2
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		log = "Adding provinces to array:"
+		64 = {
+			add_movement_operation = yes
+		}
+	}
+}
+
+country_event = {
+	id = operations.3
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		log = "Activating attack operation:"
+		64 = {
+			add_attack_operation = yes
+		}
+	}
+}
+
+#Debug event to check what provinces are in a state
+country_event = {
+	id = operations.4
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		for_each_scope_loop = {
+			array = states_required_checking
+
+			log = "Provinces in State: [?THIS.GetName]"
+
+			for_each_loop = {
+				array = provinces_@THIS
+
+				log = "Province ID: [?v]"
+			}
+		}
+	}
+}
+
+country_event = {
+	id = operations.5
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		64 = {
+			state_event = { id = dday_province_modifiers.2 days = 2 trigger_for = controller }
+		}
+	}
+}
+###
+
+### State events, dont change these to normal events since they need to inherit the state scope
+add_namespace = dday_province_modifiers
+
+state_event = {
+	id = dday_province_modifiers.1
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		remove_allies_movement_operation = yes
+	}
+}
+state_event = {
+	id = dday_province_modifiers.2
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		remove_axis_movement_operation = yes
+	}
+}
+state_event = {
+	id = dday_province_modifiers.3
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		remove_allies_attack_operation = yes
+	}
+}
+state_event = {
+	id = dday_province_modifiers.4
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		remove_axis_attack_operation = yes
+	}
+}

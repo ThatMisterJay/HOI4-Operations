@@ -1,0 +1,22 @@
+#You can customise these however you like
+is_in_allied_faction = {
+	custom_trigger_tooltip = {
+
+		tooltip = "Is in faction with the Allies"
+        OR = {
+            is_in_faction_with = ENG
+            original_tag = FRA
+        }
+    }
+}
+
+is_in_german_faction = {
+	custom_trigger_tooltip = {
+
+		tooltip = "Is in faction with the Axis"
+        OR = {
+            is_in_faction_with = GER
+            original_tag = ITA
+        }
+    }
+}
